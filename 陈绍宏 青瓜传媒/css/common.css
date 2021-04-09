@@ -1,0 +1,250 @@
+/*公共样式*/
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+@font-face {
+	/* 1.这个字体名称要注意 iconmoon */
+	font-family: 'icomoon';
+	/* 2.一定要注意路径 */
+	src: url('../fonts/icomoon.eot?7kkyc2');
+	src: url('../fonts/icomoon.eot?7kkyc2#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?7kkyc2') format('truetype'),
+		url('../fonts/icomoon.woff?7kkyc2') format('woff'),
+		url('../fonts/icomoon.svg?7kkyc2#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* -------------------------------------------------------------------- */
+
+/*版心*/
+.w {
+	width: 1180px;
+	margin: 0 auto;
+}
+
+body {
+	background-color: #f5f5f5
+}
+
+i {
+	font-family: 'icomoon';
+}
+
+.active {
+	color: #1abc9c !important;
+	border-bottom: 2px solid #1abc9c !important;
+}
+
+.b {
+	display: block;
+}
+
+.main .slider_wrap .main_slider .bullets .active2 {
+	width: 18px;
+	background-color: #1abc9c ;
+}
+
+/* --------------------------------------------------------------------- */
+
+
+#header {
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 0 3px 3px rgb(0 0 0 / 10%);
+}
+
+.header {
+	height: 64px;
+}
+
+.logo {
+	height: 64px;
+	line-height: 46px;
+}
+
+.logo img {
+	width: 155px;
+	height: 50px;
+}
+
+.logo a {
+	font-size: 0;
+}
+
+.navbar {
+	width: 100%;
+}
+
+.navbar_left {
+	margin-left: 29px;
+}
+
+.navbar_left li {
+	position: relative;
+	float: left;
+}
+
+.navbar_left a {
+	display: inline-block;
+	height: 64px;
+	padding: 0px 27px;
+	line-height: 64px;
+	font-size: 14px;
+}
+
+.navbar_left i {
+	position: absolute;
+	top: -1px;
+	right: 10px;
+}
+
+.navbar_action {
+	display: flex;
+	align-items: center;
+	height: 64px;
+}
+
+.search:hover {
+	color: #1abc9c;
+	cursor: pointer;
+}
+
+.login_res {
+	margin-left: 24px;
+	margin-right: 15px;
+	font-size: 14px;
+}
+
+.login_res a:nth-child(1) {
+	display: inline-block;
+	padding-right: 9px;
+	margin-right: 8px;
+	height: 14px;
+	border-right: 1px solid rgb(36, 35, 35);
+	line-height: 14px;
+}
+
+.publish {
+	display: inline-block;
+	width: 81px;
+	height: 26px;
+	background-color: #1abc9c;
+	border-radius: 3px;
+	color: #fff;
+	text-align: center;
+	line-height: 26px;
+}
+
+.publish:hover {
+	color: #fff;
+}
+
+#footer {
+	margin-top: 20px;
+	height: 213px;
+	background: #2d3236;
+
+}
+
+.footer {
+	padding: 50px 0;
+}
+
+.copy ul {
+	width: 100%;
+	/* height: 500px; */
+	overflow: hidden;
+}
+
+.copy li {
+	float: left;
+}
+
+.copy li a {
+	display: block;
+	height: 12px;
+	line-height: 10px;
+	padding: 0 10px;
+	border-right: 1px solid rgb(202, 202, 202);
+	color: rgb(202, 202, 202);
+}
+
+.copy li a:hover {
+	color: #1abc9c;
+}
+
+.copy p {
+	display: block;
+	padding-top: 20px;
+	font-size: 13px;
+	color: rgb(202, 202, 202);
+}
+
+.sns a {
+	display: inline-block;
+	width: 45px;
+	height: 45px;
+	margin: 0 9px;
+	background-color: #42474B;
+	border-radius: 50%;
+	line-height: 45px;
+	text-align: center;
+	transition: all .4s ease;
+}
+
+.sns a:hover {
+	background-color: #1abc9c;
+}
+
+.sns i {
+	/* margin: 0px 10px; */
+	font-size: 20px;
+	color: #fff;
+}
+
+.aside {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	margin-left: 610px;
+	cursor: pointer;
+}
+
+.aside>div {
+	width: 40px;
+	height: 40px;
+	background-color: #1abc9c;
+	line-height: 40px;
+	color: #fff;
+	font-size: 20px;
+	padding-left: 10px;
+	border-bottom: 1px solid rgb(172, 197, 172);
+}
+
+.code {
+	position: relative;
+
+}
+
+.code div {
+	position: absolute;
+	right: 40px;
+	top: 0px;
+	width: 200px;
+	height: 200px;
+	background-color: tan;
+	transition: all .3s;
+	display: none;
+}
+
+.code img {
+	width: 100%;
+}

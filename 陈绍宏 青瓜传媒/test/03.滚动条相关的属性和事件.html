@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                height: 5000px;
+            }
+            button {
+                position: fixed;
+                bottom: 200px;
+                right: 20px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btn">回到顶部</button>
+        <script>
+            /* 
+                window.onscroll  滚动事件，当浏览器中滚动条在滚动的时候会触发这个事件
+
+                获取滚动条滚动中 页面被卷去的高度：
+                    【1】document.documentElements.scrollTop 如果HTML页面没有<!DOCTYPE html> 的时候 获取不到数据，值一直为0
+                    【2】document.body.scrollTop 如果页面有<!DOCTYPE html> 的时候获取不到值
+                    【3】scrollY 不存在兼容，获取页面被卷去的高度
+
+                    scrollX  页面被卷去的宽度
+            */
+            var btn = document.getElementById("btn");
+            window.onscroll = function () {
+                // console.log(1);
+                // var y = document.documentElement.scrollTop;
+                // var y = document.body.scrollTop;
+                // var y = window.scrollY;
+                // var y = scrollY;
+                // console.log(y);
+
+                // 也拿被卷去的高度大于等于1000的时候 显示button按钮
+                if (scrollY >= 1000) {
+                    btn.style.display = "block";
+                } else {
+                    btn.style.display = "none";
+                }
+            };
+
+            btn.onclick = function () {
+                // scrollTo() 设置滚动条中页面被卷去的宽高
+                // 参数：一般情况下 给两个参数，参数1 为水平卷去高度，参数2 为垂直卷去的高度
+                //  scrollTo(0, 0);
+                // 参数还可以设置为对象
+
+                //会一瞬间就回到顶部
+                // scrollTo({ top: 0});
+
+                // 给回到顶部添加一个动画的行为
+                // 在没有behavior: "smooth" 之前，用定时一点一点改变 scrolly的值
+                scrollTo({ top: 0, behavior: "smooth" });
+
+                // scrollTo 和 scrollBy 参考位置不一样
+                // scrollTo 的参考位置为 滚动条的最顶部
+                // scrollBy 的参考位置为滚动条的当前位置，当值为正数的时候滚动往下走，当值为负数的时候 滚动条的往上走
+                // scrollBy({ top: -100 });
+            };
+        </script>
+    </body>
+</html>

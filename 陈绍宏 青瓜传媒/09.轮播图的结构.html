@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .box {
+            width: 500px;
+            height: 300px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin: auto;
+        }
+
+        .box ul {
+            width: 3000px;
+            height: 300px;
+            position: absolute;
+        }
+
+        .box ul li {
+            width: 500px;
+            float: left;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            font-size: 50px;
+        }
+
+        .box ol {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .box ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #58bc58;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            margin-right: 5px;
+            cursor: pointer;
+            user-select: none;
+            color: #fff;
+        }
+
+        .box ol .active {
+            background: blue;
+        }
+
+        .box .btn {
+            position: absolute;
+            height: 40px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .box .btn .leftBtn {
+            float: left;
+            height: 40px;
+            width: 60px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(0, 0, 0, 0.336);
+        }
+
+        .box .btn .rightBtn {
+            float: right;
+            height: 40px;
+            width: 60px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(0, 0, 0, 0.336);
+        }
+    </style>
+
+    <script src="./js/utils.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li style="background: pink">li1</li>
+            <li style="background: orange">li2</li>
+            <li style="background: blueviolet">li3</li>
+            <li style="background: palevioletred">li4</li>
+            <li style="background: yellowgreen">li5</li>
+            <li style="background: skyblue">li6</li>
+        </ul>
+        <ol>
+            <!-- <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li> -->
+        </ol>
+        <div class="btn">
+            <span class="leftBtn">&lt;</span>
+            <span class="rightBtn">&gt;</span>
+        </div>
+    </div>
+
+    <script>
+        /*
+                【1】根据 ul中的li元素 来生成ol中li元素
+                【2】复制第一个轮播图 追加到 最后一个元素的后面
+                【3】改变 ul的宽度
+                【4】移动ul的left
+                【5】当移入box的时候 停止轮播图的切换
+                【6】当移出的是 轮播图继续轮播
+                【7】点击左右按钮的时候 切换轮播图
+
+                【9】点击 ol中的li元素的时候 切换到对应的图片
+                    把点击的这个元素的索引 赋值给index
+            */
+        //    获取元素
+        let box = document.querySelector(".box");
+        let ul = box.querySelector("ul");
+        let lis = ul.querySelectorAll("li");
+        let ol = box.querySelector("ol");
+        let leftBtn = box.querySelector(".leftBtn");
+        let rightBtn = box.querySelector(".rightBtn");
+
+        let flag = true; //表示可以点击
+
+        // 【1】根据 ul中的li元素 来生成ol中li元素
+        let str = "";
+        lis.forEach((item, index) => {
+            if (index == 0) {
+                str += `<li class="active">${index + 1}</li>`;
+            } else {
+                str += `<li>${index + 1}</li>`;
+            }
+        });
+        ol.innerHTML = str;
+
+        let btnLi = ol.querySelectorAll("li");
+
+        // 【2】复制第一个轮播图 追加到 最后一个元素的后面
+        let copyLi = lis[0].cloneNode(true);
+        ul.appendChild(copyLi);
+
+        // 【3】改变 ul的宽度(获取添加之后的li的个数 和li的宽度)
+        lis = ul.querySelectorAll("li");
+        let width = lis[0].offsetWidth;
+
+        ul.style.width = lis.length * width + "px";
+
+        // 【4】移动ul的left
+        // 需要定一个定时器不断的去执行 move函数
+        // 当存在定时器的嵌套的时候 一定保证 外面定时器的切换时间 大于 里面定时器执行的总时间
+        let index = 0;
+
+        let timer = setInterval(function () {
+            index++;
+            autoPlay();
+        }, 2000);
+
+        // 【5】当移入box的时候 停止轮播图的切换
+        box.onmouseover = function () {
+            clearInterval(timer);
+        };
+
+        // 【6】当鼠标移出的时候 继续轮播图的切换
+        box.onmouseout = function () {
+            timer = setInterval(function () {
+                index++;
+                autoPlay();
+            }, 2000);
+        };
+
+        // 【7】点击左边按钮
+        leftBtn.onclick = function () {
+            if (flag) {
+                flag = false;
+                // 如果index = 0的时候表示第一张图片
+                // 把index设置为 最后一章图片的索引，ul的left 瞬间移动到最后一张图片
+                if (index == 0) {
+                    index = 6;
+                    ul.style.left = index * -500 + "px";
+                }
+                index--;
+                autoPlay();
+            }
+        };
+
+        // 【8】点击右边的按钮
+        rightBtn.onclick = function () {
+            if (flag) {
+                console.log(1);
+                index++;
+                flag = false;
+                autoPlay();
+            }
+        };
+
+        // 把函数部分封装
+        function autoPlay() {
+            // index++;
+            for (let i = 0; i < btnLi.length; i++) {
+                btnLi[i].classList.remove("active");
+            }
+
+            // 当index=6的时候 显示的就是最后一张 内容就为第一张
+            if (index == 6) {
+                btnLi[0].classList.add("active");
+            } else {
+                btnLi[index].classList.add("active");
+            }
+
+            move(ul, {
+                left: -500 * index
+            }, function () {
+                // 动画结束之后  把flag改为true，表示可以继续点击
+                flag = true;
+                // 当index 移动到最后一张图片的时候 应该改变index = 0
+                // 并且ul 瞬间 移动left = 0的位置
+                if (index == 6) {
+                    index = 0;
+                    ul.style.left = 0 + "px";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

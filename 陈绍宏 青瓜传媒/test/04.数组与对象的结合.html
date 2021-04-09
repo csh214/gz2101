@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        ul li {
+            float: left;
+            width: 200px;
+            height: 260px;
+            background: #fff;
+            box-shadow: 5px 5px 10px #000;
+            margin: 10px;
+        }
+
+        ul li p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="box">
+        <!-- <li>
+                <p>
+                    id:
+                    <span>1</span>
+                </p>
+                <p>
+                    姓名:
+                    <span>1</span>
+                </p>
+                <p>
+                    年龄:
+                    <span>1</span>
+                </p>
+                <p>
+                    性别:
+                    <span>1</span>
+                </p>
+            </li> -->
+    </ul>
+    <script>
+        // 数组中可以写对象
+        // 对象中可以写数组
+        // var jishi1 = {
+        //     name: "老田",
+        //     age: 48,
+        //     sex: "男",
+        //     id: 1,
+        // };
+        // var jishi2 = {
+        //     id: 2,
+        //     name: "老谢",
+        //     age: 59,
+        //     sex: "男",
+        // };
+
+        // 不确定有多少个对象的时候 ，你不知道要写多少次数据渲染
+        // 把对象放入数组中
+        var jishi = [{
+                name: "老田",
+                age: 48,
+                sex: "男",
+                id: 1,
+            },
+            {
+                name: "老谢",
+                age: 58,
+                sex: "男",
+                id: 9,
+            },
+            {
+                name: "伟林",
+                age: 38,
+                sex: "男",
+                id: 6,
+            },
+            {
+                name: "莹姐",
+                age: 18,
+                id: 88,
+                sex: "女",
+            },
+        ];
+        var box = document.getElementById("box");
+        // 反引号：可以让数据进行换行
+        // 反应好中写变量：${变量}
+
+        // 根据对象的age属性的属性值进行排序
+        jishi.sort(function (a, b) {
+            // return a.age - b.age;
+            return b.id - a.id;
+        });
+
+        var str = "";
+        for (var i = 0; i < jishi.length; i++) {
+            // jishi[i]
+            str += `<li>
+                <p>
+                    id:
+                    <span>${jishi[i].id}</span>
+                </p>
+                <p>
+                    姓名:
+                    <span>${jishi[i].name}</span>
+                </p>
+                <p>
+                    年龄:
+                    <span>${jishi[i].age}</span>
+                </p>
+                <p>
+                    性别:
+                    <span>${jishi[i].sex}</span>
+                </p>
+            </li>`;
+        }
+
+        box.innerHTML = str;
+
+        // function render(jishi) {
+        //     var str = `<li>
+        //     <p>
+        //         id:
+        //         <span>${jishi.id}</span>
+        //     </p>
+        //     <p>
+        //         姓名:
+        //         <span>${jishi.name}</span>
+        //     </p>
+        //     <p>
+        //         年龄:
+        //         <span>${jishi.age}</span>
+        //     </p>
+        //     <p>
+        //         性别:
+        //         <span>${jishi.sex}</span>
+        //     </p>
+        // </li>`;
+        //     return str;
+        // }
+
+        // box.innerHTML = render(jishi1);
+        // box.innerHTML += render(jishi2);
+    </script>
+</body>
+
+</html>
